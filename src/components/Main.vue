@@ -1,55 +1,46 @@
 <template>
     <main>
-        <div v-for="(item, index) in searchedMovies" :key="index">
-
+        <div class="item" v-for="(item, index) in items" :key="index">
+            <h1>{{ item.title }}</h1>
+            <h3>{{ item.original_title }}</h3>
+            <h4>{{ item.original_language }}</h4>
+            <h5>{{ item.vote_average }}</h5>
         </div>
     </main>
 </template>
 
 <script>
-import axios from 'axios';
+
 
 export default {
     name: "Main",
-    data: function() {
-        return {
-            items: []
-        }
-    },
     props: {
-        searchText: String
-    },
-    methods: {
-        searchedMovies: function() {
-            axios
-                .get('https://api.themoviedb.org/3/search/movie', {
-                    params: {
-                        api_key: 'be21832a3253c3632ed774e5e919201f',
-                        query: this.searchText,
-                        language: "it-IT"
-                    }
-                })
-                .then(
-                    res => {
-                        if(this.searchText == "") {
-                            return this.items;
-                        } else {
-                            this.items.push(res.data.results);
-                        }
-                        return this.items;
-                    }
-
-                );
-        }
-        
+        items: Array
     }
+
 }
 </script>
 
 <style lang="scss" scoped>
     main {
         height: calc(100vh - 80px);
-        background-color: lightgreen;
+        background-color: lightgrey;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px;
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        border: 1px solid blue;
+        word-wrap: break-word;
+        margin-bottom: 20px;
     }
 
 </style>

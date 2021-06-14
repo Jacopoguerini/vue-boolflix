@@ -2,10 +2,12 @@
   <div id="app">
 
     <Header 
-    @performSearch="searchTitle" />
+    @performSearch="searchTitle"
+    @reset="searchReset" />
+
 
     <Main
-    :searchText="currentSearchText"/>
+    :items="items"/>
   </div>
 </template>
 
@@ -13,12 +15,14 @@
 import Header from './components/Header';
 import Main from './components/Main';
 
+import axios from 'axios';
 
 export default {
   name: 'App',
   data: function() {
     return {
-      currentSearchText: ""
+      currentSearchText: "",
+      items: []
     }
   },
   components: {
@@ -28,6 +32,26 @@ export default {
   methods: {
     searchTitle: function(currentSearchText) {
       this.currentSearchText = currentSearchText;
+      this.getMovies();
+    },
+    searchReset: function() {
+      this.currentSearchText = "";
+    },
+    getMovies: function() {
+      axios
+        .get('https://api.themoviedb.org/3/search/movie', {
+          params: {
+            api_key: 'be21832a3253c3632ed774e5e919201f',
+            query: this.currentSearchText,
+            language: "it-IT"
+          }
+        })
+        .then(
+          res => {
+            this.items = res.data.results;
+            console.log(res);
+          }
+        );
     }
   }
 }
@@ -37,7 +61,7 @@ export default {
 @import './style/general.scss';
 
 #app {
-  height: 100vh;
+  background-color: lightgrey;
 }
 
 </style>
