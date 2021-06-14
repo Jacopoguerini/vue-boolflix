@@ -1,9 +1,11 @@
 <template>
   <div id="app">
 
-    <Header />
+    <Header 
+    @performSearch="searchTitle" />
 
-    <Main />
+    <Main
+    :searchText="currentSearchText"/>
   </div>
 </template>
 
@@ -14,9 +16,19 @@ import Main from './components/Main';
 
 export default {
   name: 'App',
+  data: function() {
+    return {
+      currentSearchText: ""
+    }
+  },
   components: {
     Header,
     Main
+  },
+  methods: {
+    searchTitle: function(currentSearchText) {
+      this.currentSearchText = currentSearchText;
+    }
   }
 }
 </script>

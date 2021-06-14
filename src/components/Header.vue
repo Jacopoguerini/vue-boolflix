@@ -3,8 +3,8 @@
         <input
         type="text"
         placeholder="Titoli, persone, generi"
-        v-model.trim="searchText"
-        @keyup="$emit('performSearch', searchFieldText)">
+        v-model.trim="currentSearchText"
+        @keyup="$emit('performSearch', currentSearchText)">
     </header>
 </template>
 
@@ -15,13 +15,12 @@ export default {
     name: "Header",
     data: function() {
         return {
-            searchFieldText: ''
+            currentSearchText: ''
         }
     },
     methods: {
         performSearch: function(text) {
-            this.searchFieldText = text;
-            console.log(this.searchFieldText);
+            this.currentSearchText = text;           
         }
     }
 }
