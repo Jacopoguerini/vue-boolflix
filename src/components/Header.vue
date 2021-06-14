@@ -2,19 +2,15 @@
     <header>
         <input
         type="text"
-        placeholder="Titoli, persone, generi"
+        placeholder="Titoli"
         v-model="currentSearchText"
-        @keyup="$emit('performSearch', currentSearchText)">
+        @keyup.enter="$emit('performSearch', currentSearchText)">
         
         <span
         class="btn search-btn"
         @click="$emit('performSearch', currentSearchText)">
+        <i class="fas fa-search"></i>
         Cerca</span>
-        
-        <span
-        class="btn reset-btn"
-        @click="$emit('reset', currentSearchText)">
-        Reset</span>
     </header>
 </template>
 
@@ -30,16 +26,15 @@ export default {
     },
     methods: {
         performSearch: function(text) {
-            this.currentSearchText = text;      
-        },
-        reset: function() {
-            this.currentSearchText = "";
+            this.currentSearchText = text;    
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../style/general.scss';
+
     header {
         height: 80px;
         background-color: grey;
@@ -47,14 +42,24 @@ export default {
         justify-content: flex-end;
         align-items: center;
         padding: 0 100px;
+
+        input {
+            height: 40%;
+            padding-left: 5px;
+
+            &:focus {
+            outline: none
+            }
+            &::placeholder {
+                color: grey;
+            }
+        }
+
+
+        .fa-search {
+            margin-right: 10px;
+        }
     }
 
-    .btn {
-        text-transform: uppercase;
-        cursor: pointer;
-        margin-left: 15px;
-        padding: 5px 25px;
-        background-color: red;
-        font-size: 16px;
-    }
+
 </style>

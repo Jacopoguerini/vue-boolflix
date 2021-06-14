@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="container">
         <div class="item" v-for="(item, index) in items" :key="index">
             <h1>{{ item.title }}</h1>
             <h3>{{ item.original_title }}</h3>
@@ -22,25 +22,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    main {
-        height: calc(100vh - 80px);
+    .container {
+        height: calc(100% - 80px);
+        width: 80%;
+        margin: 0 auto;
         background-color: lightgrey;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-        padding: 25px;
-    }
+        padding: 30px;
 
-    .item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 15px;
-        border: 1px solid blue;
-        word-wrap: break-word;
-        margin-bottom: 20px;
+        .item {
+            width: calc(20% - 10px);
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid black;
+            word-wrap: break-word;
+            margin-bottom: 20px;
+        }
     }
 
 </style>

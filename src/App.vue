@@ -2,9 +2,7 @@
   <div id="app">
 
     <Header 
-    @performSearch="searchTitle"
-    @reset="searchReset" />
-
+    @performSearch="searchTitle" />
 
     <Main
     :items="items"/>
@@ -34,9 +32,6 @@ export default {
       this.currentSearchText = currentSearchText;
       this.getMovies();
     },
-    searchReset: function() {
-      this.currentSearchText = "";
-    },
     getMovies: function() {
       axios
         .get('https://api.themoviedb.org/3/search/movie', {
@@ -49,7 +44,6 @@ export default {
         .then(
           res => {
             this.items = res.data.results;
-            console.log(res);
           }
         );
     }
@@ -61,7 +55,10 @@ export default {
 @import './style/general.scss';
 
 #app {
+  height: 100vh;
   background-color: lightgrey;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 </style>

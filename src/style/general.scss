@@ -1,5 +1,32 @@
+@import "~@fontsource/roboto/index.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: "Roboto";
+}
+
+.btn {
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 5px 20px;
+    background-color: red;
+    border: 2px solid red;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+
+    &:hover {
+        color: red;
+        background-color: white;
+        border: 2px solid white;
+        box-shadow: 0 0 5px black;
+    }
 }
