@@ -3,21 +3,24 @@
         <div class="item" v-for="(item, index) in items" :key="index">
             <h1>{{ item.title }}</h1>
             <h3>{{ item.original_title }}</h3>
-            <h4>{{ item.original_language }}</h4>
+            <country-flag :country='item.original_language' size='normal'/>
             <h5>{{ item.vote_average }}</h5>
+            
         </div>
     </main>
 </template>
 
 <script>
-
+import CountryFlag from 'vue-country-flag';
 
 export default {
     name: "Main",
     props: {
-        items: Array
+        items: Array,
+    },
+    components: {
+        CountryFlag
     }
-
 }
 </script>
 
@@ -44,6 +47,10 @@ export default {
             border: 1px solid black;
             word-wrap: break-word;
             margin-bottom: 20px;
+
+            h1, h3, h4, h5 {
+                text-align: center;
+            }
         }
     }
 
