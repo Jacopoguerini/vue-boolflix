@@ -20,6 +20,8 @@ export default {
   name: 'App',
   data: function() {
     return {
+      apiMovieUrl: 'https://api.themoviedb.org/3/search/movie',
+      apiKey: 'be21832a3253c3632ed774e5e919201f',
       currentSearchText: "",
       items: []
     }
@@ -35,9 +37,9 @@ export default {
     },
     getMovies: function() {
       axios
-        .get('https://api.themoviedb.org/3/search/movie', {
+        .get(this.apiMovieUrl, {
           params: {
-            api_key: 'be21832a3253c3632ed774e5e919201f',
+            api_key: this.apiKey,
             query: this.currentSearchText,
             language: "it-IT"
           }
