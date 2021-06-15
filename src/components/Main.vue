@@ -2,28 +2,33 @@
     <main>
 
         <section>
-            <p>{{ searchProductionText }}<span>{{ moviesSearchSpan }}</span></p>
+
+            <p>{{ searchProductionText }}<span>{{ moviesSearchSpan }}</span>:</p>
+
             <div class="container">
                 <Item
                 v-for="item in movies"
                 :key="item.id"
                 :item="item"/>
             </div>
+
         </section>
 
         <section>
-            <p>{{ searchProductionText }} <span>{{ seriesSearchSpan }}</span></p>
+
+            <p>{{ searchProductionText }} <span>{{ seriesSearchSpan }}</span>:</p>
+
             <div class="container">
                 <Item
                 v-for="item in series"
                 :key="item.id"
                 :item="item"/>
             </div>
-
+            
         </section>
 
-        <p>La tua ricerca non ha prodotto risultati.</p>
         
+                
     </main>
 </template>
 
@@ -35,8 +40,9 @@ export default {
     data: function() {
         return {
             searchProductionText: "La tua ricerca ha prodotto questi risultati in ",
-            moviesSearchSpan: "MOVIES:",
-            seriesSearchSpan: "SERIE TV:",
+            moviesSearchSpan: "MOVIES",
+            seriesSearchSpan: "SERIE TV",
+            noResultsText: "La tua ricerca non ha prodotto alcun risultato"
         }
     },
     props: {
@@ -46,6 +52,9 @@ export default {
     },
     components: {
         Item,
+    },
+    methods: {
+
     }
 }
 </script>
