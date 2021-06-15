@@ -15,10 +15,13 @@
             </div>
             
             <!-- Scartata ipotesi di usare v-if e funzione per visualizzare l'immagine della lingua -->
-
             <lang-flag :iso="item.original_language" :squared="false"/>
 
-            <p @click="starsRating">{{ item.vote_average }}</p>
+            <div class="stars">
+                <i
+                    class="far fa-star">
+                </i>
+            </div>
 
         </div>
             
@@ -32,8 +35,7 @@ export default {
     name: "Item",
     data: function() {
         return {
-            imgUrlRoot: 'https://image.tmdb.org/t/p/w342',
-            stars: 0
+            imgUrlRoot: 'https://image.tmdb.org/t/p/w342'
         }
     },
     props: {
@@ -41,11 +43,6 @@ export default {
     },
     components: {
         LangFlag
-    },
-    methods: {
-        starsRating: function(element) {
-            this.stars = Math.round(element.vote_average / 2);
-        }
     }
 }
 </script>
@@ -61,7 +58,7 @@ export default {
         align-items: center;
         margin: 0 30px 30px 0;
         position: relative;
-        cursor: pointer;
+        color: white;
 
         img {
             width: 100%;
@@ -79,7 +76,7 @@ export default {
 
             h3, h4, p {
                 text-align: center;
-        }
+            }
         }
     }
 
