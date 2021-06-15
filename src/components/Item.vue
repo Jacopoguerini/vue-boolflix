@@ -44,7 +44,7 @@ export default {
         padding: 15px;
         border: 1px solid black;
         word-wrap: break-word;
-        margin-bottom: 20px;
+        margin: 0 10px 20px 0;
 
         h3, h4, p {
             text-align: center;

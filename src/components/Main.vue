@@ -1,8 +1,8 @@
 <template>
     <main>
 
-        <section v-if="movies.length > 0">
-            <p>La ricerca ha prodotto questi risultati in  <span>Film</span>:</p>
+        <section>
+            <p>{{ searchProductionText }}<span>{{ moviesSearchSpan }}</span></p>
             <div class="container">
                 <Item
                 v-for="item in movies"
@@ -11,8 +11,8 @@
             </div>
         </section>
 
-        <section v-else-if="series.length > 0">
-            <p>La ricerca ha prodotto questi risultati in <span>Serie TV</span>:</p>
+        <section>
+            <p>{{ searchProductionText }} <span>{{ seriesSearchSpan }}</span></p>
             <div class="container">
                 <Item
                 v-for="item in series"
@@ -22,7 +22,7 @@
 
         </section>
 
-        <div v-else>La tua ricerca non ha prodotto risultati.</div>
+        <p>La tua ricerca non ha prodotto risultati.</p>
         
     </main>
 </template>
@@ -32,6 +32,13 @@ import Item from './Item';
 
 export default {
     name: "Main",
+    data: function() {
+        return {
+            searchProductionText: "La tua ricerca ha prodotto questi risultati in ",
+            moviesSearchSpan: "MOVIES:",
+            seriesSearchSpan: "SERIE TV:",
+        }
+    },
     props: {
         "movies": Array,
         "series": Array,
@@ -44,8 +51,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    span {
-        text-transform: uppercase;
+    p {
+        padding: 30px 30px 0 30px;
+        font-size: 20px;
     }
 
     .container {
@@ -55,7 +63,7 @@ export default {
         background-color: lightgrey;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         padding: 30px;
     }
