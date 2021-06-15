@@ -1,8 +1,14 @@
 <template>
     <div class="item">
-        <h3>{{ item.title }}</h3>
+        <div class="title">
+            <h3>{{ item.title }}</h3>
+            <h3>{{ item.name }}</h3>
+        </div>
 
-        <h4>{{ item.original_title }}</h4>
+        <div class="og-title">
+            <h4>{{ item.original_title }}</h4>
+            <h4>{{ item.original_name }}</h4>
+        </div>
         
         <!-- Scartata ipotesi di usare v-if e funzione per visualizzare l'immagine della lingua-->
         <lang-flag :iso="item.original_language" :squared="false"/>

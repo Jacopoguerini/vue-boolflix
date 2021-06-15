@@ -1,11 +1,27 @@
 <template>
     <main>
-        <div v-if="items.length > 0" class="container">
-            <Item
-            v-for="item in items"
-            :key="item.id"
-            :item="item"/>
-        </div>
+
+        <section v-if="movies.length > 0">
+            <p>La ricerca ha prodotto questi risultati in  <span>Film</span>:</p>
+            <div class="container">
+                <Item
+                v-for="item in movies"
+                :key="item.id"
+                :item="item"/>
+            </div>
+        </section>
+
+        <section v-else-if="series.length > 0">
+            <p>La ricerca ha prodotto questi risultati in <span>Serie TV</span>:</p>
+            <div class="container">
+                <Item
+                v-for="item in series"
+                :key="item.id"
+                :item="item"/>
+            </div>
+
+        </section>
+
         <div v-else>La tua ricerca non ha prodotto risultati.</div>
         
     </main>
@@ -17,7 +33,8 @@ import Item from './Item';
 export default {
     name: "Main",
     props: {
-        "items": Array,
+        "movies": Array,
+        "series": Array,
         "item": Object
     },
     components: {
@@ -27,6 +44,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    span {
+        text-transform: uppercase;
+    }
+
     .container {
         height: calc(100% - 80px);
         width: 80%;

@@ -5,7 +5,8 @@
     @performSearch="searchTitle" />
 
     <Main
-    :items="items"/>
+    :movies="movies"
+    :series="series"/>
   </div>
 </template>
 
@@ -21,9 +22,11 @@ export default {
   data: function() {
     return {
       apiMovieUrl: 'https://api.themoviedb.org/3/search/movie',
+      apiSeriesUrl: 'https://api.themoviedb.org/3/search/tv',
       apiKey: 'be21832a3253c3632ed774e5e919201f',
       currentSearchText: "",
-      items: []
+      movies: [],
+      series: []
     }
   },
   components: {
@@ -34,6 +37,7 @@ export default {
     searchTitle: function(currentSearchText) {
       this.currentSearchText = currentSearchText;
       this.getMovies();
+      this.getSeries();
     },
     getMovies: function() {
       axios
@@ -46,7 +50,22 @@ export default {
         })
         .then(
           res => {
-            this.items = res.data.results;
+            this.movies = res.data.results;
+          }
+        );
+    },
+    getSeries: function() {
+      axios
+        .get(this.apiSeriesUrl, {
+          params: {
+            api_key: this.apiKey,
+            query: this.currentSearchText,
+            language: "it-IT"
+          }
+        })
+        .then(
+          res => {
+            this.series = res.data.results;
           }
         );
     }
