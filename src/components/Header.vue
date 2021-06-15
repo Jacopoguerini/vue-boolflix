@@ -7,7 +7,7 @@
         <div class="search-bar">
             <input
                 type="text"
-                placeholder="Titoli"
+                placeholder="Titoli, film e serie"
                 v-model="currentSearchText"
                 @keyup.enter="$emit('performSearch', currentSearchText)">
                 
@@ -47,7 +47,11 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 100px;
+        padding: 0 50px;
+        // position: fixed;
+        // top: 0;
+        // width: 100%;
+        // z-index: 1000;
 
         a {
             height: 100%;

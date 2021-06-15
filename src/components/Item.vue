@@ -18,7 +18,8 @@
 
             <lang-flag :iso="item.original_language" :squared="false"/>
 
-            <p>{{ item.vote_average }}</p>
+            <p @click="starsRating">{{ item.vote_average }}</p>
+
         </div>
             
     </div>
@@ -40,6 +41,11 @@ export default {
     },
     components: {
         LangFlag
+    },
+    methods: {
+        starsRating: function(element) {
+            this.stars = Math.round(element.vote_average / 2);
+        }
     }
 }
 </script>
@@ -47,14 +53,15 @@ export default {
 <style lang="scss" scoped>
 
     .item {
-        width: calc(20% - 10px);
+        width: calc(20% - 30px);
         height: 350px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 0 10px 20px 0;
+        margin: 0 30px 30px 0;
         position: relative;
+        cursor: pointer;
 
         img {
             width: 100%;

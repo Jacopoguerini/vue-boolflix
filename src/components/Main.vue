@@ -24,10 +24,8 @@
                 :key="item.id"
                 :item="item"/>
             </div>
-            
-        </section>
 
-        
+        </section>
                 
     </main>
 </template>
@@ -40,15 +38,14 @@ export default {
     data: function() {
         return {
             searchProductionText: "La tua ricerca ha prodotto questi risultati in ",
-            moviesSearchSpan: "MOVIES",
+            moviesSearchSpan: "FILM",
             seriesSearchSpan: "SERIE TV",
             noResultsText: "La tua ricerca non ha prodotto alcun risultato"
         }
     },
     props: {
         "movies": Array,
-        "series": Array,
-        "item": Object
+        "series": Array
     },
     components: {
         Item,
@@ -60,6 +57,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../style/general.scss';
+
+    // main {
+    //     margin-top: 70px;
+    // }
     p {
         padding: 30px 30px 0 30px;
         font-size: 20px;
@@ -74,7 +76,7 @@ export default {
         flex-wrap: wrap;
         justify-content: flex-start;
         align-items: center;
-        padding: 30px;
+        padding: 30px 0 30px;
     }
 
 </style>
