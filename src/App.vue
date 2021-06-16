@@ -2,7 +2,8 @@
   <div id="app">
 
     <Header 
-    @performSearch="searchTitle" />
+    @performSearch="searchTitle"
+    @resetSearch="resetSearch" />
 
     <div
     v-if="movies.length == 0 && series.length == 0"
@@ -20,11 +21,13 @@
       <Main
       :movies="movies"  
       :series="series"
-      :currentSearchText="currentSearchText"/>
+      :currentSearchText="currentSearchText"
+      :moviesPage="moviesPage"
+      :totalMoviePages="totalMoviePages"
+      :seriesPage="seriesPage"
+      @nextMoviePage="nextMoviePage"
+      @prevMoviePage="prevMoviePage" />
     </div>
-
-
-
   </div>
 </template>
 
@@ -43,7 +46,10 @@ export default {
       apiKey: 'be21832a3253c3632ed774e5e919201f',
       currentSearchText: "",
       movies: [],
-      series: []
+      series: [],
+      moviesPage: 1,
+      totalMoviePages: 0,
+      seriesPage: 1
     }
   },
   components: {
@@ -56,6 +62,11 @@ export default {
       this.getMovies();
       this.getSeries();
     },
+    resetSearch: function() {
+      this.movies = [];
+      this.series = [];
+      this.moviesPage = 1;
+    },
     getMovies: function() {
       axios
         .get(this.apiMovieUrl, {
@@ -63,12 +74,14 @@ export default {
             api_key: this.apiKey,
             query: this.currentSearchText,
             language: "it-IT",
-            page: 1
+            page: this.moviesPage
           }
         })
         .then(
           res => {
             this.movies = res.data.results;
+            this.moviesPage = 1;
+            this.totalMoviePages = res.data.total_pages;
           }
         );
     },
@@ -79,7 +92,7 @@ export default {
             api_key: this.apiKey,
             query: this.currentSearchText,
             language: "it-IT",
-            page: 1
+            page: this.seriesPage
           }
         })
         .then(
@@ -88,6 +101,40 @@ export default {
           }
         );
     }
+    // nextMoviePage: function() {
+    //   axios
+    //     .get(this.apiMovieUrl, {
+    //       params: {
+    //         api_key: this.apiKey,
+    //         query: this.currentSearchText,
+    //         language: "it-IT",
+    //         page: this.moviesPage
+    //       }
+    //     })
+    //     .then(
+    //       res => {
+    //         this.movies = res.data.results;
+    //         this.moviesPage ++;
+    //       }
+    //     );
+    // },
+    // prevMoviePage: function() {
+    //   this.moviesPage --;
+    //   axios
+    //     .get(this.apiMovieUrl, {
+    //       params: {
+    //         api_key: this.apiKey,
+    //         query: this.currentSearchText,
+    //         language: "it-IT",
+    //         page: this.moviesPage
+    //       }
+    //     })
+    //     .then(
+    //       res => {
+    //         this.movies = res.data.results;
+    //       }
+    //     );
+    // }
   }
 }
 </script>

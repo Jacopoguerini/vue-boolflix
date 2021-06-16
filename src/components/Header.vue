@@ -1,6 +1,6 @@
 <template>
     <header>
-        <a href="#">
+        <a @click="resetSearch" href="#">
             <img src="../assets/img/logo.png" alt="Logo Image">
         </a>
         
@@ -33,6 +33,10 @@ export default {
     methods: {
         performSearch: function() {
             this.$emit('performSearch', this.currentSearchText);
+            this.currentSearchText = '';
+        },
+        resetSearch: function() {
+            this.$emit('resetSearch', this.currentSearchText);
             this.currentSearchText = '';
         }
     }

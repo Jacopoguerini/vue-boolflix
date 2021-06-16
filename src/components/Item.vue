@@ -21,8 +21,8 @@
 
             <span>{{
                 item.release_date ?
-                item.release_date.substring(0, 4) :
-                item.first_air_date.substring(0, 4)
+                getYear(item.release_date) :
+                getYear(item.first_air_date)
             }}</span>
             
             <!-- Scartata ipotesi v-if per visualizzare l'immagine -->
@@ -72,6 +72,9 @@ export default {
     methods: {
         voteRound: function(element) {
             return Math.round((element.vote_average / 2));
+        },
+        getYear: function(element) {
+            return element.substr(0, 4);
         }
     }
 }
@@ -154,7 +157,7 @@ export default {
 
             .overview {
                 max-height: 50%;
-                overflow-y: scroll;
+                overflow-y: auto;
                 &::-webkit-scrollbar {
                 width: 8px;
                 }

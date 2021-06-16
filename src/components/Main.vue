@@ -9,6 +9,19 @@
                 :key="item.id"
                 :item="item"/>
             </div>
+
+            <!-- <div class="next-prev">
+                <span @click="prevMoviePage">
+                    <i class="fas fa-chevron-left"></i>
+                    Pagina Precedente
+                </span>
+                <span
+                v-if="moviesPage <= totalMoviePages"
+                @click="nextMoviePage">
+                    Pagina Successiva
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </div> -->
         </section>
         <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{moviesSearchSpan}}!</p> -->
 
@@ -44,10 +57,21 @@ export default {
     props: {
         "movies": Array,
         "series": Array,
-        "currentSearchText": String
+        "currentSearchText": String,
+        "moviesPage": Number,
+        "totalMoviePages": Number,
+        "seriesPage": Number        
     },
     components: {
         Item
+    },
+    methods: {
+        nextMoviePage: function() {
+            this.$emit('nextMoviePage', this.moviesPage);
+        },
+        prevMoviePage: function() {
+            this.$emit('prevMoviePage', this.moviesPage);
+        }
     }
 }
 </script>
@@ -57,10 +81,22 @@ export default {
 
     main {
         color: white;
+
+        // .next-prev {
+        //     text-align: center;
+
+        //     span {
+        //         margin: 0 15px 0 15px;
+        //         padding: 5px 15px;
+        //         cursor: pointer;
+        //         border: 1px solid white;
+        //         border-radius: 5px;
+        //     }
+        // }
     }
 
     p {
-        padding: 30px 0 0 30px;
+        padding: 30px 0 15px 30px;
         font-size: 20px;
     }
 
