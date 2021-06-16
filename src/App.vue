@@ -4,9 +4,17 @@
     <Header 
     @performSearch="searchTitle" />
 
-    <Main
-    :movies="movies"
-    :series="series"/>
+    <div v-if="movies.length != 0 && series.length != 0">
+      <div @click="resetSearch">Prova a resettare</div>
+
+      <Main
+      :movies="movies"  
+      :series="series"/>
+    </div>
+
+    <div v-else class="default-image">
+
+    </div>
 
   </div>
 </template>
@@ -14,7 +22,6 @@
 <script>
 import Header from './components/Header';
 import Main from './components/Main';
-
 
 import axios from 'axios';
 
@@ -39,6 +46,10 @@ export default {
       this.currentSearchText = currentSearchText;
       this.getMovies();
       this.getSeries();
+    },
+    resetSearch: function() {
+      this.movies = [];
+      this.series = [];
     },
     getMovies: function() {
       axios
@@ -82,6 +93,12 @@ export default {
   background-color: lightgrey;
   overflow-x: hidden;
   overflow-y: auto;
+
+  .default-image {
+    width: 100%;
+    height: calc(100% - 70px);
+    background-image: url(https://assets.nflxext.com/ffe/siteui/vlv3/c0a32732-b033-43b3-be2a-8fee037a6146/ac84d843-0e4d-4bff-9992-7dd636827a40/IT-it-20210607-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+  }
 }
 
 </style>

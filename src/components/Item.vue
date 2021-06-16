@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         
-        <img :v-if="item.poster_path != 'null'" :src="imgUrlRoot + item.poster_path" :alt="item.title">
+        <img :v-if="item.poster_path != null" :src="imgUrlRoot + item.poster_path" :alt="item.title">
         <!-- <img v-else src="https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png" :alt="item.title"> -->
 
         <div class="details">
