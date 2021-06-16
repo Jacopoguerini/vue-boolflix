@@ -19,6 +19,11 @@
                 item.original_name
             }}</h4>
 
+            <span>{{
+                item.release_date ?
+                item.release_date.substring(0, 4) :
+                item.first_air_date.substring(0, 4)
+            }}</span>
             
             <!-- Scartata ipotesi v-if per visualizzare l'immagine -->
             <!-- <img
@@ -34,8 +39,9 @@
                 :class="i <= voteRound(item) ? 'fas fa-star' : 'far fa-star'">
                 </i>
 
-                <p>{{item.vote_average}}/10</p>
+                <p>{{item.vote_average}}<span id="max-vote">/10</span></p>
             </div>
+
 
             <p class="overview">
                 {{ item.overview }}
@@ -83,6 +89,13 @@ export default {
         justify-content: center;
         align-items: center;
         position: relative;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.2);
+            z-index: 1000;
+            box-shadow: 0 0 10px lightgray;
+        }
 
         img {
             width: 100%;
@@ -106,8 +119,12 @@ export default {
             &:hover {
                 opacity: 1
             }
-            
-            & > *:not(:last-child) {
+
+            h3 {
+                margin-bottom: 5px;
+            }
+            h4 {
+                font-size: 12px;
                 margin-bottom: 15px;
             }
             h3, h4 {
@@ -115,11 +132,18 @@ export default {
             }
             span {
                 font-size: 12px;
+                margin-bottom: 10px;
             }
 
 
             .stars {
+                margin-bottom: 15px;
                 text-align: center;
+
+                i {
+                    margin-bottom: 5px;
+                }
+
                 .fas {
                     color: gold;
                 }
@@ -129,22 +153,26 @@ export default {
             }
 
             .overview {
-                max-height: 40%;
+                max-height: 50%;
                 overflow-y: scroll;
                 &::-webkit-scrollbar {
                 width: 8px;
                 }
                 &::-webkit-scrollbar-track {
                 background: #f1f1f1;
-                border-radius: 10px;
+                border-radius: 5px;
                 }
                 &::-webkit-scrollbar-thumb {
                 background: grey;
-                border-radius: 10px;
+                border-radius: 5px;
                 }
                 &::-webkit-scrollbar-thumb:hover {
                 background: rgb(87, 87, 87);
                 }
+            }
+
+            #max-vote {
+                font-size: 10px;
             }
        }
     }

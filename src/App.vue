@@ -62,7 +62,8 @@ export default {
           params: {
             api_key: this.apiKey,
             query: this.currentSearchText,
-            language: "it-IT"
+            language: "it-IT",
+            page: 1
           }
         })
         .then(
@@ -78,6 +79,7 @@ export default {
             api_key: this.apiKey,
             query: this.currentSearchText,
             language: "it-IT",
+            page: 1
           }
         })
         .then(
