@@ -4,22 +4,32 @@
         <img :src="imgUrlRoot + item.poster_path" :alt="item.title">
 
         <div class="details">
-            <div class="title">
-                <h3>{{ item.title }}</h3>
-                <h3>{{ item.name }}</h3>
-            </div>
+            <h3>{{
+                item.title ?
+                item.title :
+                item.name                
+            }}</h3>
 
-            <div class="og-title">
-                <h4>{{ item.original_title }}</h4>
-                <h4>{{ item.original_name }}</h4>
-            </div>
+
+            <h4>{{
+                item.original_title ?
+                item.original_title :
+                item.original_name
+            }}</h4>
+
             
-            <!-- Scartata ipotesi di usare v-if e funzione per visualizzare l'immagine della lingua -->
+            <!-- Scartata ipotesi v-if per visualizzare l'immagine -->
+            <!-- <img
+            :src="require(`..assets/img/${item.original_language}.png`)"
+            :alt="`bandiera ${item.original_language}`"
+            v-if="flags.includes(item.original_language)"> -->
+            <!-- <p v-else>{{ item.original_language }}</p> -->
+
             <lang-flag :iso="item.original_language" :squared="false"/>
 
             <div class="stars">
                 <i
-                    class="far fa-star">
+                class="far fa-star">
                 </i>
             </div>
 
@@ -35,7 +45,8 @@ export default {
     name: "Item",
     data: function() {
         return {
-            imgUrlRoot: 'https://image.tmdb.org/t/p/w342'
+            imgUrlRoot: 'https://image.tmdb.org/t/p/w342',
+            flags: ['it', 'en']
         }
     },
     props: {
@@ -50,15 +61,16 @@ export default {
 <style lang="scss" scoped>
 
     .item {
-        width: calc(20% - 30px);
+        width: 20%;
         height: 350px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 0 30px 30px 0;
+        margin-bottom: 30px;
         position: relative;
         color: white;
+        padding: 15px;
 
         img {
             width: 100%;
@@ -67,15 +79,20 @@ export default {
         }
 
         .details {
+            width: 80%;
             position: absolute;
             word-wrap: break-word;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-
-            h3, h4, p {
+                
+            h3, h4 {
                 text-align: center;
+            }
+            
+            & > * {
+                margin: 10px 0;
             }
         }
     }

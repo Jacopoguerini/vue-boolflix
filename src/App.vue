@@ -7,6 +7,7 @@
     <Main
     :movies="movies"
     :series="series"/>
+
   </div>
 </template>
 
@@ -60,7 +61,7 @@ export default {
           params: {
             api_key: this.apiKey,
             query: this.currentSearchText,
-            language: "it-IT"
+            language: "it-IT",
           }
         })
         .then(

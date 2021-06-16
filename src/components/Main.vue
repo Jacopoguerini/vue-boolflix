@@ -3,7 +3,7 @@
 
         <section>
 
-            <p>{{ searchProductionText }}<span>{{ moviesSearchSpan }}</span>:</p>
+            <p>{{ searchResultText }}<span>{{ moviesSearchSpan }}</span>:</p>
 
             <div class="container">
                 <Item
@@ -16,7 +16,7 @@
 
         <section>
 
-            <p>{{ searchProductionText }} <span>{{ seriesSearchSpan }}</span>:</p>
+            <p>{{ searchResultText }} <span>{{ seriesSearchSpan }}</span>:</p>
 
             <div class="container">
                 <Item
@@ -37,7 +37,7 @@ export default {
     name: "Main",
     data: function() {
         return {
-            searchProductionText: "La tua ricerca ha prodotto questi risultati in ",
+            searchResultText: "La tua ricerca ha prodotto questi risultati in ",
             moviesSearchSpan: "FILM",
             seriesSearchSpan: "SERIE TV",
             noResultsText: "La tua ricerca non ha prodotto alcun risultato"
@@ -59,9 +59,6 @@ export default {
 <style lang="scss" scoped>
 @import '../style/general.scss';
 
-    // main {
-    //     margin-top: 70px;
-    // }
     p {
         padding: 30px 30px 0 30px;
         font-size: 20px;
@@ -77,6 +74,7 @@ export default {
         justify-content: flex-start;
         align-items: center;
         padding: 30px 0 30px;
+        position: relative;
     }
 
 </style>
