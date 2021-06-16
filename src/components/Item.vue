@@ -1,7 +1,8 @@
 <template>
     <div class="item">
         
-        <img :v-if="item.poster_path != null" :src="imgUrlRoot + item.poster_path" :alt="item.title">
+        <img v-if="item.poster_path != null" :src="imgUrlRoot + item.poster_path" :alt="item.title">
+        <img v-else src="https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png" alt="">
         <!-- <img v-else src="https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png" :alt="item.title"> -->
 
         <div class="details">
@@ -30,11 +31,15 @@
 
             <div class="stars">
                 <i v-for="i in 5" :key="i"
-                class="far fa-star">
+                :class="i <= voteRound(item) ? 'fas fa-star' : 'far fa-star'">
                 </i>
+
+                <p>{{item.vote_average}}/10</p>
             </div>
 
-            <p>{{item.vote_average}}</p>
+            <p class="overview">
+                {{ item.overview }}
+            </p>
 
         </div>
             
@@ -59,8 +64,8 @@ export default {
         LangFlag
     },
     methods: {
-        voteRound: function() {
-            Math.round(this.item.vote_average /2);
+        voteRound: function(element) {
+            return Math.round((element.vote_average / 2));
         }
     }
 }
@@ -69,10 +74,9 @@ export default {
 <style lang="scss" scoped>
 
     .item {
-        width: 20%;
+        width: calc(20% - 20px);
         height: 350px;
-        padding: 15px;
-        margin-bottom: 30px;
+        margin: 0 10px 30px 10px;
         color: white;
         display: flex;
         flex-direction: column;
@@ -90,21 +94,59 @@ export default {
             width: 100%;
             height: 100%;
             padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
             position: absolute;
             word-wrap: break-word;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-                
+            opacity: 0;
+
+            &:hover {
+                opacity: 1
+            }
+            
+            & > *:not(:last-child) {
+                margin-bottom: 15px;
+            }
             h3, h4 {
                 text-align: center;
             }
-            
-            & > * {
-                margin: 10px 0;
+            span {
+                font-size: 12px;
             }
-        }
+
+
+            .stars {
+                text-align: center;
+                .fas {
+                    color: gold;
+                }
+                .far {
+                    color: goldenrod;
+                }
+            }
+
+            .overview {
+                max-height: 40%;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                width: 8px;
+                }
+                &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+                }
+                &::-webkit-scrollbar-thumb {
+                background: grey;
+                border-radius: 10px;
+                }
+                &::-webkit-scrollbar-thumb:hover {
+                background: rgb(87, 87, 87);
+                }
+            }
+       }
     }
 
 

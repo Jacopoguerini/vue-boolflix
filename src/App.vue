@@ -4,17 +4,26 @@
     <Header 
     @performSearch="searchTitle" />
 
-    <div v-if="movies.length != 0 && series.length != 0">
-      <div @click="resetSearch">Prova a resettare</div>
+    <div
+    v-if="movies.length == 0 && series.length == 0"
+    class="default-image">
+
+      <div class="main-title">
+        <h1>Inizia qui la tua ricerca.</h1>
+        <h2>Film e serie tv sono a portata di un click.</h2>
+      </div>
+
+    </div>
+
+    <div v-else>
 
       <Main
       :movies="movies"  
-      :series="series"/>
+      :series="series"
+      :currentSearchText="currentSearchText"/>
     </div>
 
-    <div v-else class="default-image">
 
-    </div>
 
   </div>
 </template>
@@ -46,10 +55,6 @@ export default {
       this.currentSearchText = currentSearchText;
       this.getMovies();
       this.getSeries();
-    },
-    resetSearch: function() {
-      this.movies = [];
-      this.series = [];
     },
     getMovies: function() {
       axios
@@ -90,7 +95,7 @@ export default {
 
 #app {
   height: 100vh;
-  background-color: lightgrey;
+  background-color: black;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -98,6 +103,25 @@ export default {
     width: 100%;
     height: calc(100% - 70px);
     background-image: url(https://assets.nflxext.com/ffe/siteui/vlv3/c0a32732-b033-43b3-be2a-8fee037a6146/ac84d843-0e4d-4bff-9992-7dd636827a40/IT-it-20210607-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+
+    .main-title {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+    }
+    h1 {
+      font-size: 70px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 40px;
+    }
   }
 }
 

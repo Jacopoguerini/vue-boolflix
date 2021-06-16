@@ -1,7 +1,7 @@
 <template>
     <main>
         <section v-if="movies.length > 0">
-            <p>{{ searchResultText }} {{ moviesSearchSpan }}:</p>
+            <p>La tua ricerca di "{{ currentSearchText }}" ha prodotto questi risultati in {{ moviesSearchSpan }}:</p>
 
             <div class="container">
                 <Item
@@ -13,7 +13,7 @@
         <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{moviesSearchSpan}}!</p> -->
 
         <section v-if="series.length > 0">
-            <p>{{ searchResultText }} {{ seriesSearchSpan }}:</p>
+            <p>La tua ricerca di "{{ currentSearchText }}" ha prodotto questi risultati in {{ seriesSearchSpan }}:</p>
 
             <div class="container">
                 <Item
@@ -25,7 +25,7 @@
         </section>
         <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{ seriesSearchSpan }}!</p> -->
 
-        <p v-if="movies.length == 0 && series.length == 0">Nessun risultato per la tua ricerca.</p>
+        <!-- <p v-if="movies.length == 0 && series.length == 0">Nessun risultato per la tua ricerca.</p> -->
                 
     </main>
 </template>
@@ -37,15 +37,14 @@ export default {
     name: "Main",
     data: function() {
         return {
-            searchResultText: "La tua ricerca ha prodotto questi risultati in ",
             moviesSearchSpan: "FILM",
             seriesSearchSpan: "SERIE TV",
-            noResultsText: "La tua ricerca non ha prodotto alcun risultato"
         }
     },
     props: {
         "movies": Array,
-        "series": Array
+        "series": Array,
+        "currentSearchText": String
     },
     components: {
         Item
@@ -56,8 +55,12 @@ export default {
 <style lang="scss" scoped>
 @import '../style/general.scss';
 
+    main {
+        color: white;
+    }
+
     p {
-        padding: 30px 30px 0 30px;
+        padding: 30px 0 0 30px;
         font-size: 20px;
     }
 
@@ -65,7 +68,6 @@ export default {
         height: calc(100% - 80px);
         width: 80%;
         margin: 0 auto;
-        background-color: lightgrey;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;

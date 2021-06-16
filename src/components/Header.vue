@@ -9,11 +9,11 @@
                 type="text"
                 placeholder="Titoli, film e serie"
                 v-model="currentSearchText"
-                @keyup.enter="$emit('performSearch', currentSearchText)">
+                @keyup.enter="performSearch">
                 
             <span
             class="btn search-btn"
-            @click="$emit('performSearch', currentSearchText)">
+            @click="performSearch">
                 <i class="fas fa-search"></i>
             Cerca</span>
         </div>
@@ -31,8 +31,9 @@ export default {
         }
     },
     methods: {
-        performSearch: function(text) {
-            this.currentSearchText = text;    
+        performSearch: function() {
+            this.$emit('performSearch', this.currentSearchText);
+            this.currentSearchText = '';
         }
     }
 }
@@ -43,11 +44,12 @@ export default {
 
     header {
         height: 70px;
-        background-color: grey;
+        background-color: black;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 50px;
+        box-shadow: 0 0 20px grey;
         // position: fixed;
         // top: 0;
         // width: 100%;
