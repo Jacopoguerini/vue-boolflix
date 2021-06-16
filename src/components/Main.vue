@@ -1,9 +1,7 @@
 <template>
     <main>
-
-        <section>
-
-            <p>{{ searchResultText }}<span>{{ moviesSearchSpan }}</span>:</p>
+        <section v-if="movies.length > 0">
+            <p>{{ searchResultText }} {{ moviesSearchSpan }}:</p>
 
             <div class="container">
                 <Item
@@ -11,12 +9,11 @@
                 :key="item.id"
                 :item="item"/>
             </div>
-
         </section>
+        <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{moviesSearchSpan}}!</p> -->
 
-        <section>
-
-            <p>{{ searchResultText }} <span>{{ seriesSearchSpan }}</span>:</p>
+        <section v-if="series.length > 0">
+            <p>{{ searchResultText }} {{ seriesSearchSpan }}:</p>
 
             <div class="container">
                 <Item
@@ -26,6 +23,9 @@
             </div>
 
         </section>
+        <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{ seriesSearchSpan }}!</p> -->
+
+        <p v-if="movies.length == 0 && series.length == 0">Nessun risultato per la tua ricerca.</p>
                 
     </main>
 </template>
@@ -48,10 +48,7 @@ export default {
         "series": Array
     },
     components: {
-        Item,
-    },
-    methods: {
-
+        Item
     }
 }
 </script>

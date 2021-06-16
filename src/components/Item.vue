@@ -1,7 +1,8 @@
 <template>
     <div class="item">
         
-        <img :src="imgUrlRoot + item.poster_path" :alt="item.title">
+        <img :v-if="item.poster_path != 'null'" :src="imgUrlRoot + item.poster_path" :alt="item.title">
+        <!-- <img v-else src="https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png" :alt="item.title"> -->
 
         <div class="details">
             <h3>{{
@@ -28,10 +29,12 @@
             <lang-flag :iso="item.original_language" :squared="false"/>
 
             <div class="stars">
-                <i
+                <i v-for="i in 5" :key="i"
                 class="far fa-star">
                 </i>
             </div>
+
+            <p>{{item.vote_average}}</p>
 
         </div>
             
@@ -54,6 +57,11 @@ export default {
     },
     components: {
         LangFlag
+    },
+    methods: {
+        voteRound: function() {
+            Math.round(this.item.vote_average /2);
+        }
     }
 }
 </script>
@@ -63,14 +71,14 @@ export default {
     .item {
         width: 20%;
         height: 350px;
+        padding: 15px;
+        margin-bottom: 30px;
+        color: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 30px;
         position: relative;
-        color: white;
-        padding: 15px;
 
         img {
             width: 100%;
@@ -79,7 +87,9 @@ export default {
         }
 
         .details {
-            width: 80%;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
             position: absolute;
             word-wrap: break-word;
             display: flex;
