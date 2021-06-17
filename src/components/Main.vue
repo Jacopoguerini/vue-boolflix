@@ -10,18 +10,23 @@
                 :item="item"/>
             </div>
 
-            <!-- <div class="next-prev">
-                <span @click="prevMoviePage">
+            <div class="next-prev">
+                <div
+                @click="prevMoviePage"
+                v-show="moviesPage > 1"
+                class="prev-page">
                     <i class="fas fa-chevron-left"></i>
-                    Pagina Precedente
-                </span>
-                <span
-                v-if="moviesPage <= totalMoviePages"
-                @click="nextMoviePage">
-                    Pagina Successiva
+                    <span>Pagina Precedente</span>
+                </div>
+
+                <div
+                @click="nextMoviePage"
+                v-show="moviesPage < totalMoviePages"
+                class="next-page">
+                    <span>Pagina Successiva</span>
                     <i class="fas fa-chevron-right"></i>
-                </span>
-            </div> -->
+                </div>
+            </div>
         </section>
         <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{moviesSearchSpan}}!</p> -->
 
@@ -35,6 +40,23 @@
                 :item="item"/>
             </div>
 
+            <div class="next-prev">
+                <div
+                @click="prevSeriesPage"
+                v-show="seriesPage > 1"
+                class="prev-page">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Pagina Precedente</span>
+                </div>
+
+                <div
+                @click="nextSeriesPage"
+                v-show="seriesPage < totalSeriesPages"
+                class="next-page">
+                    <span>Pagina Successiva</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
         </section>
         <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{ seriesSearchSpan }}!</p> -->
 
@@ -60,7 +82,8 @@ export default {
         "currentSearchText": String,
         "moviesPage": Number,
         "totalMoviePages": Number,
-        "seriesPage": Number        
+        "seriesPage": Number,
+        "totalSeriesPages": Number
     },
     components: {
         Item
@@ -71,6 +94,12 @@ export default {
         },
         prevMoviePage: function() {
             this.$emit('prevMoviePage', this.moviesPage);
+        },
+        nextSeriesPage: function() {
+            this.$emit('nextSeriesPage', this.seriesPage);
+        },
+        prevSeriesPage: function() {
+            this.$emit('prevSeriesPage', this.seriesPage);
         }
     }
 }
@@ -111,5 +140,4 @@ export default {
         padding: 30px 0 30px;
         position: relative;
     }
-
 </style>

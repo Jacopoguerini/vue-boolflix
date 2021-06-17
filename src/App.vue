@@ -1,22 +1,24 @@
 <template>
   <div id="app">
 
-    <Header 
-    @performSearch="searchTitle"
-    @resetSearch="resetSearch" />
+    <header id="header">
+      <Header 
+      @performSearch="searchTitle"
+      @resetSearch="resetSearch" />
+    </header>
 
     <div
     v-if="movies.length == 0 && series.length == 0"
     class="default-image">
 
-      <div class="main-title">
+      <div id="main-title">
         <h1>Inizia qui la tua ricerca.</h1>
         <h2>Film e serie tv sono a portata di un click.</h2>
       </div>
 
     </div>
 
-    <div v-else>
+    <div v-else id="main-results">
 
       <Main
       :movies="movies"  
@@ -25,8 +27,11 @@
       :moviesPage="moviesPage"
       :totalMoviePages="totalMoviePages"
       :seriesPage="seriesPage"
+      :totalSeriesPages="totalSeriesPages"
       @nextMoviePage="nextMoviePage"
-      @prevMoviePage="prevMoviePage" />
+      @prevMoviePage="prevMoviePage"
+      @nextSeriesPage="nextSeriesPage"
+      @prevSeriesPage="prevSeriesPage" />
     </div>
   </div>
 </template>
@@ -49,7 +54,8 @@ export default {
       series: [],
       moviesPage: 1,
       totalMoviePages: 0,
-      seriesPage: 1
+      seriesPage: 1,
+      totalSeriesPages: 0
     }
   },
   components: {
@@ -61,13 +67,49 @@ export default {
       this.currentSearchText = currentSearchText;
       this.getMovies();
       this.getSeries();
+      this.moviesPage = 1;
+      this.seriesPage = 1
     },
     resetSearch: function() {
       this.movies = [];
       this.series = [];
       this.moviesPage = 1;
+      this.seriesPage = 1;
     },
     getMovies: function() {
+      axios
+        .get(this.apiMovieUrl, {
+          params: {
+            api_key: this.apiKey,
+            query: this.currentSearchText,
+            language: "it-IT"
+          }
+        })
+        .then(
+          res => {
+            this.movies = res.data.results;
+            this.totalMoviePages = res.data.total_pages;
+          }
+        );
+    },
+    getSeries: function() {
+      axios
+        .get(this.apiSeriesUrl, {
+          params: {
+            api_key: this.apiKey,
+            query: this.currentSearchText,
+            language: "it-IT"
+          }
+        })
+        .then(
+          res => {
+            this.series = res.data.results;
+            this.totalSeriesPages = res.data.total_pages;
+          }
+        );
+    },
+    nextMoviePage: function() {
+      this.moviesPage ++;
       axios
         .get(this.apiMovieUrl, {
           params: {
@@ -80,12 +122,45 @@ export default {
         .then(
           res => {
             this.movies = res.data.results;
-            this.moviesPage = 1;
-            this.totalMoviePages = res.data.total_pages;
           }
         );
     },
-    getSeries: function() {
+    prevMoviePage: function() {
+      this.moviesPage --;
+      axios
+        .get(this.apiMovieUrl, {
+          params: {
+            api_key: this.apiKey,
+            query: this.currentSearchText,
+            language: "it-IT",
+            page: this.moviesPage
+          }
+        })
+        .then(
+          res => {
+            this.movies = res.data.results;
+          }
+        );
+    },
+    nextSeriesPage: function() {
+      this.seriesPage ++;
+      axios
+        .get(this.apiSeriesUrl, {
+          params: {
+            api_key: this.apiKey,
+            query: this.currentSearchText,
+            language: "it-IT",
+            page: this.seriesPage
+          }
+        })
+        .then(
+          res => {
+            this.series = res.data.results;
+          }
+        );
+    },
+    prevSeriesPage: function() {
+      this.seriesPage --;
       axios
         .get(this.apiSeriesUrl, {
           params: {
@@ -101,40 +176,7 @@ export default {
           }
         );
     }
-    // nextMoviePage: function() {
-    //   axios
-    //     .get(this.apiMovieUrl, {
-    //       params: {
-    //         api_key: this.apiKey,
-    //         query: this.currentSearchText,
-    //         language: "it-IT",
-    //         page: this.moviesPage
-    //       }
-    //     })
-    //     .then(
-    //       res => {
-    //         this.movies = res.data.results;
-    //         this.moviesPage ++;
-    //       }
-    //     );
-    // },
-    // prevMoviePage: function() {
-    //   this.moviesPage --;
-    //   axios
-    //     .get(this.apiMovieUrl, {
-    //       params: {
-    //         api_key: this.apiKey,
-    //         query: this.currentSearchText,
-    //         language: "it-IT",
-    //         page: this.moviesPage
-    //       }
-    //     })
-    //     .then(
-    //       res => {
-    //         this.movies = res.data.results;
-    //       }
-    //     );
-    // }
+    
   }
 }
 </script>
@@ -153,7 +195,7 @@ export default {
     height: calc(100% - 70px);
     background-image: url(https://assets.nflxext.com/ffe/siteui/vlv3/c0a32732-b033-43b3-be2a-8fee037a6146/ac84d843-0e4d-4bff-9992-7dd636827a40/IT-it-20210607-popsignuptwoweeks-perspective_alpha_website_large.jpg);
 
-    .main-title {
+    #main-title {
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.4);

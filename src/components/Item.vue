@@ -3,7 +3,6 @@
         
         <img v-if="item.poster_path != null" :src="imgUrlRoot + item.poster_path" :alt="item.title">
         <img v-else src="https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png" alt="">
-        <!-- <img v-else src="https://cdn.bookauthority.org/dist/images/book-cover-not-available.6b5a104fa66be4eec4fd16aebd34fe04.png" :alt="item.title"> -->
 
         <div class="details">
             <h3>{{
@@ -166,11 +165,11 @@ export default {
                 border-radius: 5px;
                 }
                 &::-webkit-scrollbar-thumb {
-                background: grey;
+                background: darkred;
                 border-radius: 5px;
                 }
                 &::-webkit-scrollbar-thumb:hover {
-                background: rgb(87, 87, 87);
+                background: rgb(71, 9, 9);
                 }
             }
 
