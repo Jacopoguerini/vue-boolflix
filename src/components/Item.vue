@@ -46,10 +46,10 @@
                 {{ item.overview }}
             </p>
 
-            <div class="cast-genre">
+            <!-- <div class="cast-genre">
                 <span @click="getMovieCast">Cast</span>
                 <span>Genre</span>
-            </div>
+            </div> -->
 
         </div>
             
@@ -59,17 +59,12 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
 
-import axios from 'axios';
-
 export default {
     name: "Item",
     data: function() {
         return {
             imgUrlRoot: 'https://image.tmdb.org/t/p/w342',
             // flags: ['it', 'en'],
-            movieCast: [],
-            apiMovieCast: 'https://api.themoviedb.org/3/movie/`${item.id}`/credits'
-
         }
     },
     props: {
@@ -84,19 +79,6 @@ export default {
         },
         getYear: function(element) {
             return element.substr(0, 4);
-        },
-        getMovieCast: function() {
-            axios
-            .get(this.apiMovieCast, {
-            params: {
-                api_key: this.apiKey,
-                movie_id: this.item.id,
-            }
-            })
-            .then(
-            res => {
-                this.movieCast = res.data.cast.name;
-            });
         }
     }
 }
@@ -200,28 +182,28 @@ export default {
                 font-size: 10px;
             }
 
-            .cast-genre {
-                margin-top: 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+            // .cast-genre {
+            //     margin-top: 20px;
+            //     display: flex;
+            //     justify-content: space-between;
+            //     align-items: center;
 
-                span {
-                    margin: 0 10px;
-                    padding: 5px 15px;
-                    border: 1px solid white;
-                    border-radius: 2px;
-                    cursor: pointer;
-                    transition: transform 0.2s;
+            //     span {
+            //         margin: 0 10px;
+            //         padding: 5px 15px;
+            //         border: 1px solid white;
+            //         border-radius: 2px;
+            //         cursor: pointer;
+            //         transition: transform 0.2s;
 
-                    &:hover {
-                        background-color: white;
-                        color: darkred;
-                        font-weight: 600;
-                        transform: scale(1.1);
-                    }
-                }
-            }
+            //         &:hover {
+            //             background-color: white;
+            //             color: darkred;
+            //             font-weight: 600;
+            //             transform: scale(1.1);
+            //         }
+            //     }
+            // }
        }
     }
 

@@ -55,7 +55,7 @@ export default {
       moviesPage: 1,
       totalMoviePages: 0,
       seriesPage: 1,
-      totalSeriesPages: 0
+      totalSeriesPages: 0,
     }
   },
   components: {
