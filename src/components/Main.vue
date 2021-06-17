@@ -1,6 +1,6 @@
 <template>
     <main>
-        <section v-if="movies.length > 0">
+        <section id="movie-results" v-if="movies.length > 0">
             <p>La tua ricerca di "{{ currentSearchText }}" ha prodotto questi risultati in {{ moviesSearchSpan }}:</p>
 
             <div class="container">
@@ -16,21 +16,21 @@
                 v-show="moviesPage > 1"
                 class="prev-page">
                     <i class="fas fa-chevron-left"></i>
-                    <span>Pagina Precedente</span>
+                    <span>Pagina precedente</span>
                 </div>
 
                 <div
                 @click="nextMoviePage"
                 v-show="moviesPage < totalMoviePages"
                 class="next-page">
-                    <span>Pagina Successiva</span>
+                    <span>Pagina successiva</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
         </section>
         <!-- <p v-else>La tua ricerca non ha prodotto risultati in {{moviesSearchSpan}}!</p> -->
 
-        <section v-if="series.length > 0">
+        <section id="series-results" v-if="series.length > 0">
             <p>La tua ricerca di "{{ currentSearchText }}" ha prodotto questi risultati in {{ seriesSearchSpan }}:</p>
 
             <div class="container">
@@ -46,14 +46,14 @@
                 v-show="seriesPage > 1"
                 class="prev-page">
                     <i class="fas fa-chevron-left"></i>
-                    <span>Pagina Precedente</span>
+                    <span>Pagina precedente</span>
                 </div>
 
                 <div
                 @click="nextSeriesPage"
                 v-show="seriesPage < totalSeriesPages"
                 class="next-page">
-                    <span>Pagina Successiva</span>
+                    <span>Pagina successiva</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>

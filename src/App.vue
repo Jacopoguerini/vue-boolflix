@@ -18,7 +18,7 @@
 
     </div>
 
-    <div v-else id="main-results">
+    <div v-else>
 
       <Main
       :movies="movies"  
@@ -122,6 +122,7 @@ export default {
         .then(
           res => {
             this.movies = res.data.results;
+            document.getElementById("movie-results").scrollIntoView();          
           }
         );
     },
@@ -139,6 +140,7 @@ export default {
         .then(
           res => {
             this.movies = res.data.results;
+            document.getElementById("movie-results").scrollIntoView();  
           }
         );
     },
@@ -156,6 +158,7 @@ export default {
         .then(
           res => {
             this.series = res.data.results;
+            document.getElementById("series-results").scrollIntoView(); 
           }
         );
     },
@@ -173,6 +176,7 @@ export default {
         .then(
           res => {
             this.series = res.data.results;
+            document.getElementById("series-results").scrollIntoView();
           }
         );
     }
