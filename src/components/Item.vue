@@ -46,6 +46,11 @@
                 {{ item.overview }}
             </p>
 
+            <!-- <div class="cast-genre">
+                <span @click="getMovieCast">Cast</span>
+                <span>Genre</span>
+            </div> -->
+
         </div>
             
     </div>
@@ -54,12 +59,19 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
 
+// import axios from 'axios';
+
 export default {
     name: "Item",
     data: function() {
         return {
             imgUrlRoot: 'https://image.tmdb.org/t/p/w342',
             flags: ['it', 'en']
+            // movieCast: [],
+            // apiMovieCast: 'https://api.themoviedb.org/3/movie/{{this.movie_id}}/credits',
+            // apiMovieCastId: '',
+            // seriesCast: [],
+            // apiSeriesCast: ''
         }
     },
     props: {
@@ -75,6 +87,19 @@ export default {
         getYear: function(element) {
             return element.substr(0, 4);
         }
+        // getMovieCast: function() {
+        //     axios
+        //     .get(this.apiMovieCast, {
+        //     params: {
+        //         api_key: this.apiKey,
+        //         movie_id: this.item.id,
+        //     }
+        //     })
+        //     .then(
+        //     res => {
+        //         this.movieCast = res.data.cast.name;
+        //     });
+        // }
     }
 }
 </script>
@@ -176,6 +201,20 @@ export default {
             #max-vote {
                 font-size: 10px;
             }
+
+            // .cast-genre {
+            //     margin-top: 20px;
+            //     display: flex;
+            //     justify-content: space-between;
+            //     align-items: center;
+
+            //     span {
+            //         margin: 0 10px;
+            //         padding: 5px 15px;
+            //         border: 1px solid white;
+            //         border-radius: 2px;
+            //     }
+            // }
        }
     }
 
